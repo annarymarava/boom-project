@@ -1,0 +1,436 @@
+body {
+    font-family: 'Poiret One', cursive;
+}
+
+input, button {
+    outline: none;
+}
+
+a:hover {
+    color: #fff;
+}
+
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.main-content {
+    min-height: 90%;
+    background: linear-gradient(to bottom, #3456b6, #fff);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;    
+    justify-content: space-between;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 50px;
+    background-color: #3456b6;
+    padding: 10px 20px;
+    box-shadow: 0px 6px 12px 0px #fff;
+}
+
+.container-page-logo {
+    display: flex;
+    align-items: center;
+}
+
+.page-logo {
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+    color: #fff;
+    padding: 5px;
+    border: 1px solid #3456b6;
+}
+
+.page-logo:hover {
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.start-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hello-section h3 {
+    font-size: 25px;
+    text-align: center;
+}
+
+.hello-section p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.container-btn {
+    padding: 10px;
+    margin-top: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-btn a{
+    display: flex;
+    width: 180px;
+    height: 30px;
+    color: #fff;
+    border: none;
+    background-color: #3456b6;
+    cursor: pointer;
+    justify-content: center;
+    font-weight: bold;
+    align-items: center;
+}
+
+.container-btn a:hover{
+    box-shadow: 0px 6px 12px 0px #fff;
+}
+
+/* --------------------------------------------------------------------------------------------------------------- */
+
+.sign-in-page, .sign-up-page, .page-with-module {
+    display: flex;
+    align-items: center;
+}
+
+.sign-in-page form, .sign-up-page form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+}
+
+.sign-in-page label, .sign-up-page label {
+    margin-top: 20px;
+}
+
+.sign-in-page input, .sign-up-page input, .words-container input {
+    outline: none;
+    cursor: pointer;
+    font-family: 'Poiret One', cursive;
+    font-weight: bold;
+    color: #3456b6;
+}
+
+.sign-in-page button, .sign-up-page button, .btn-make-module, .page-with-module button, .page-with-text-module button, .page-with-question button {
+    width: 350px;
+    height: 30px;
+    color: #fff;
+    border: none;
+    background-color: #3456b6;
+    cursor: pointer;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-weight: bold;
+}
+
+.sign-in-page button:hover, .sign-up-page button:hover, .page-with-text-module a:hover, .btn-make-module:hover {
+    box-shadow: 0px 6px 12px 0px #fff;
+}
+
+.page-with-module h3 {
+    font-weight: bold;
+}
+
+.container-page-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+}
+/* --------------------------------------------------------------------------------------------------------------- */
+
+.page-with-module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-log-out {
+    display: flex;
+    width: 50px;
+    height: 25px;
+    color: #3456b6;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 3px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-log-out:hover {
+    box-shadow: 0px 3px 6px 0px #fff;
+}
+
+/* --------------------------------------------------------------------------------------------------------------- */
+
+
+.page-with-question {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ .page-with-question form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.page-with-question input{
+    width: 100%;
+}
+/* --------------------------------------------------------------------------------------------------------------- */
+
+.page-with-text-module {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 30px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.page-with-text-module h3 {
+    font-weight: bold;
+}
+
+.page-with-text-module form {
+    width: 100%;
+}
+
+.header-module {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.words-container {
+    margin-top: 25px;
+    display: flex;
+    padding: 20px;
+    background-color: #3456b6;
+    justify-content: space-between;
+    border-radius: 3px;
+}
+
+.words-container div {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+/* --------------------------------------------------------------------------------------------------------------- */
+.user-cards {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    border: 3px solid #fff;
+    justify-content: center;
+    align-items: center;
+    color: #3456b6;
+    font-weight: bolder;
+    margin: 25px;
+    cursor: pointer;
+}
+
+
+.user-cards:hover {
+    transform: scale(1.2);
+}
+
+.container-module {
+    display: flex;
+
+}
+
+.page-with-game {
+    display: flex;
+    width: 100%;
+}
+
+.game-container {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.game-words-container {
+    width: 70%;
+    height: 100%;
+    margin: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-words-container p {
+    margin-bottom: 30px;
+}
+
+.page-with-game {
+    flex-direction: row;
+}
+
+.game {
+    width: 60%;
+    height: 70px;
+    border: 2px solid #fff;
+    background-color: #3456b6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.game:hover {
+    transform: scale(1.2);
+}
+
+.preview-words-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3456b6;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.game-card {
+    font-weight: bold;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    border: 3px solid #3456b6;
+    color: #3456b6;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+
+.game-card-button-container {
+    margin: 75px;
+    display: flex;
+}
+
+.btn-prev-card,
+.btn-next-card {
+    width: 30px;
+    height: 100%;
+    margin: 0;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3456b6;
+    border: none;
+    cursor: pointer;
+}
+
+.double {
+    font-size: 35px;
+}
+
+.btn-prev-card:hover .double,
+.btn-next-card:hover .double {
+    font-size: 50px;
+}
+
+.btn-disabled {
+    opacity: 0.5 !important;
+}
+
+.btn-prev-card:hover.btn-disabled .double,
+.btn-next-card:hover.btn-disabled .double {
+    font-size: 35px;
+}
+
+.error-message {
+    font-weight: bold;
+    font-size: 14px;
+    color: #ff0000;
+}
+
+.block {
+    opacity: 0;
+}
+
+button {
+    outline: none;
+}
+
+/* --------------------------------------------------------------------------------------------------------------- */
+
+.dragn-drop-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #fff;
+    position: relative;
+    background-color: #3456b6;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dragn-drop-container div {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    color: #3456b6;
+    background-color: #fff;
+    z-index: 10;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dragn-drop-container .hovered {
+    background-color: #d1d8e2;
+}
+
+.dragn-drop-container .hide {
+    display: none;
+}
+
+.big-text {
+    font-size: 50px;
+    font-weight: bold;
+}
