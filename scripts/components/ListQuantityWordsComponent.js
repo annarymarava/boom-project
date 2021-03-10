@@ -3,7 +3,7 @@ const ListQuantityWordsComponent = () => {
     return (
         `<div class="page-with-question">
         <form>
-        <label for="enter-quantity-words">Введите количество слов в Вашем списке</label>
+        <label for="enter-quantity-words">Введите количество слов в Вашем списке(min: 6 слов)</label>
         <input type="text" id="enter-quantity-words">
     </form>
     <button id="btn-procced-create-module">

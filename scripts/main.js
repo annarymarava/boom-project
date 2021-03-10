@@ -3,6 +3,8 @@ import GameCardsComponent from './components/GameCardsComponent.js';
 import GameComponent from './components/GameComponent.js';
 import GameDragnDropComponent from './components/GameDragnDropComponent.js';
 import GameDragnDropFinishComponent from './components/GameDragnDropFinishComponent.js';
+import GameTestComponent from './components/GameTestComponent.js';
+import GameTestFinishComponent from './components/GameTestFinishComponent.js';
 import GameWriteComponent from './components/GameWriteComponent.js';
 import ListQuantityWordsComponent from './components/ListQuantityWordsComponent.js';
 import LoginComponent from './components/LoginComponent.js';
@@ -23,6 +25,8 @@ const components = {
     gameDragnDropPage: GameDragnDropComponent,
     gameDragnDropFinishPage: GameDragnDropFinishComponent,
     gameWritePage: GameWriteComponent,
+    gameTestPage: GameTestComponent,
+    gameTestFinishPage: GameTestFinishComponent,
 }
 const myApp = (function () {
     function AppView() {
@@ -115,6 +119,16 @@ const myApp = (function () {
             let containerAnswer = document.getElementById('game-write-answer');
             containerAnswer.value = rightAnswer;
             containerAnswer.classList.add('mistake-answer');
+        }
+
+        this.gameTestModule = function (terms, definitions) { 
+            container = document.getElementById('game-words-container');
+            container.innerHTML = components.gameTestPage(terms, definitions);
+        }
+
+        this.checkTestModule = function(result) {
+            container = document.getElementById('game-words-container');
+            container.innerHTML = components.gameTestFinishPage(result);
         }
     }
 
@@ -297,6 +311,29 @@ const myApp = (function () {
                 }, 1000)
             }
         }
+
+        this.gameTestModule = function () { 
+            myAppView.gameTestModule(that.dataModel.activeCard.terms, that.dataModel.activeCard.definitions);
+        }
+
+        this.checkTestModule = function (data) {
+            let rightAnswer = 9;
+            for (let i=0; i< 3; i++) {
+                if (data.answer.value[i] !== this.dataModel.activeCard.terms[data.answer.atribut[i]]) {
+                    rightAnswer--;
+                }
+
+                if (data.selection.value[i] !== this.dataModel.activeCard.terms[data.selection.atribut[i]]) {
+                    rightAnswer--;
+                }
+
+                if (data.option.value[i] !== this.dataModel.activeCard.terms[data.option.atribut[i]]) {
+                    rightAnswer--;
+                }
+            }
+            let result = Math.round(rightAnswer*100/9);
+            myAppView.checkTestModule(result);
+        }
     }
 
 
@@ -446,11 +483,21 @@ const myApp = (function () {
                     that.gameWriteModule();
                 }
 
-                
                 if (event.target && event.target.id === 'check-write-module') {  //клик по проверить в функции "ПИСЬМО"
                     that.defaultController(event);
                     that.gameCheckWriteModule();
                 }
+
+                if (event.target && event.target.id === 'btn-test-module') {  //клик по функции "ТЕСТ"
+                    that.defaultController(event);
+                    that.gameTestModule();
+                }
+
+                if (event.target && event.target.id === 'check-test-module') {  //клик по проверить в функции "ТЕСТ"
+                    that.defaultController(event);
+                    that.checkTestModule();
+            }
+                
             });
         },
 
@@ -507,7 +554,7 @@ const myApp = (function () {
 
         this.checkProccedModule = function () { //проверка на содержание числа в поле ввода, для создания модуля
             const count = document.getElementById('enter-quantity-words');
-            if (count.value && parseInt(count.value)) {
+            if (count.value && parseInt(count.value) && count.value > 5) {
                 that.moduleData.coundWord = count.value;
                 location.hash = '#create-module'
             } else {
@@ -627,7 +674,7 @@ const myApp = (function () {
             }
         }
 
-        this.gameWriteModule = function () {
+        this.gameWriteModule = function () { //функция письмо
             myAppModel.gameWriteModule(that.gameWrite.number);
         }
 
@@ -635,6 +682,47 @@ const myApp = (function () {
             that.gameWrite.number++;
             let answerWord = document.getElementById('game-write-answer');
             myAppModel.gameCheckWriteModule(answerWord.value, that.gameWrite.number);
+        }
+
+        this.gameTestModule = function () { //функция тест
+            myAppModel.gameTestModule();
+        }
+
+        this.checkTestModule = function() { //проверка функции тест
+            const dataTest = {
+                answer: {atribut: [], value: []},
+                selection: {atribut: [], value: []},
+                option: {atribut: [], value: []}
+            }
+            const answers = document.querySelectorAll('.test-answer-container input');
+            const selections = document.querySelectorAll('.test-selection-container-first input');
+            const paragraphs = document.querySelectorAll('.test-selection-container-second p');
+            const options = document.querySelectorAll('.test-options-container input:checked');
+            const wordsRadio = document.querySelectorAll('.test-options-container span');
+            for (let item of answers) {
+                dataTest.answer.atribut.push(item.getAttribute('data-test-answer'));
+                dataTest.answer.value.push(item.value);
+            }
+
+            for (let item of selections) {
+                let val = item.value.toUpperCase();
+                dataTest.selection.atribut.push(item.getAttribute('data-test-selection'));
+                for (let elem of paragraphs) {
+                    if (elem.getAttribute('data-selection-letter') === val) {
+                        dataTest.selection.value.push(elem.getAttribute('data-selection-value'));
+                    }
+                }
+            }
+
+            for (let item of wordsRadio) {
+                dataTest.option.atribut.push(item.getAttribute('data-test-options'));
+            }
+
+            for (let item of options) {
+                dataTest.option.value.push(item.value);
+            }
+            console.log(dataTest)
+            myAppModel.checkTestModule(dataTest);
         }
     }
 

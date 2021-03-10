@@ -127,7 +127,7 @@ nav {
     color: #3456b6;
 }
 
-.sign-in-page button, .sign-up-page button, .btn-make-module, .page-with-module button, .page-with-text-module button, .page-with-question button, .game-write-container button {
+.sign-in-page button, .sign-up-page button, .btn-make-module, .page-with-module button, .page-with-text-module button, .page-with-question button, .game-write-container button, .check-test-module {
     width: 350px;
     height: 30px;
     color: #fff;
@@ -142,7 +142,7 @@ nav {
     font-weight: bold;
 }
 
-.sign-in-page button:hover, .sign-up-page button:hover, .page-with-text-module a:hover, .btn-make-module:hover, .game-write-container button:hover {
+.sign-in-page button:hover, .sign-up-page button:hover, .page-with-text-module a:hover, .btn-make-module:hover, .game-write-container button:hover, .check-test-module:hover {
     box-shadow: 0px 6px 12px 0px #fff;
 }
 
@@ -397,7 +397,7 @@ button {
 
 .dragn-drop-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     border: 1px solid #fff;
     position: relative;
     background-color: #3456b6;
@@ -431,7 +431,7 @@ button {
 }
 
 .big-text {
-    font-size: 50px;
+    font-size: 35px;
     font-weight: bold;
 }
 /* --------------------------------------------------------------------------------------------------------------- */
@@ -463,4 +463,94 @@ button {
 
 .mistake-answer {
     border: 2px solid #ff0000;
+}
+
+/* --------------------------------------------------------------------------------------------------------------- */
+
+.test-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.test-container input {
+    border: none;
+    border-radius: 6px;
+}
+
+.test-answer-container, .test-selection-container, .test-options-container {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.test-answer-container h3, .test-selection-container h3, .test-options-container h3{
+    margin-bottom: 10px;
+}
+
+.test-answer-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.test-answer-container div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.test-answer-container input {
+    width: 80%;
+}
+
+.test-selection-container form {
+    display: flex;
+}
+
+.test-selection-container-first {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.test-selection-container-first div {
+    display: flex;
+    width: 100%;
+}
+
+.test-selection-container-first input, .test-selection-container-first span {
+    width: 100%;
+}
+
+.test-selection-container-first span {
+    font-weight: bold;
+}
+
+.test-selection-container-second {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.test-selection-container-second div{
+    display: flex;
+}
+
+.test-selection-container-second span{
+    margin-right: 20px;
+}
+
+.test-options-container div {
+   display: flex;
+   justify-content: space-around;
+}
+
+.test-options-container span {
+    font-weight: bold;
+}
+
+.test-options-container input {
+    margin-right: 10px;
 }
