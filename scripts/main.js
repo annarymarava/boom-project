@@ -235,7 +235,13 @@ const myApp = (function () {
 
         this.openOptionForModule = function (id) {
             let cardNameArr = id.split('-');
-            let cardName = cardNameArr[1];
+            cardNameArr.splice(0, 1)
+            let cardName = null;
+            if(cardNameArr.length === 1) {
+                cardName = cardNameArr[0];
+            } else {
+                cardName = cardNameArr.join(' ');
+            }
             firebase.database().ref(that.dataModel.idUser).once("value")
                 .then(function (snapshot) {
                     let data = snapshot.val();
@@ -594,6 +600,7 @@ const myApp = (function () {
             } else {
                 myAppModel.createModuleError();
             }
+            console.log(this.moduleData)
         }
 
         this.createModule = function () { //создание учебного модуля с получением созданного объекта
@@ -602,7 +609,7 @@ const myApp = (function () {
                 terms: this.moduleData.terms,
                 definitions: this.moduleData.definitions
             });
-            this.moduleData.nameModule = [];
+            this.moduleData.nameModule = null;
             this.moduleData.terms = [];
             this.moduleData.definitions = [];
         }
@@ -721,7 +728,6 @@ const myApp = (function () {
             for (let item of options) {
                 dataTest.option.value.push(item.value);
             }
-            console.log(dataTest)
             myAppModel.checkTestModule(dataTest);
         }
     }
