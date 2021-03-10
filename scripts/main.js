@@ -3,6 +3,7 @@ import GameCardsComponent from './components/GameCardsComponent.js';
 import GameComponent from './components/GameComponent.js';
 import GameDragnDropComponent from './components/GameDragnDropComponent.js';
 import GameDragnDropFinishComponent from './components/GameDragnDropFinishComponent.js';
+import GameWriteComponent from './components/GameWriteComponent.js';
 import ListQuantityWordsComponent from './components/ListQuantityWordsComponent.js';
 import LoginComponent from './components/LoginComponent.js';
 import NavComponent from './components/NavComponent.js';
@@ -21,12 +22,14 @@ const components = {
     gameCardPage: GameCardsComponent,
     gameDragnDropPage: GameDragnDropComponent,
     gameDragnDropFinishPage: GameDragnDropFinishComponent,
+    gameWritePage: GameWriteComponent,
 }
 const myApp = (function () {
     function AppView() {
         let appContainer = null;
         let section = null;
         let container = null;
+        let mistakeAnswer = [];
 
         this.init = function (app) {
             appContainer = app;
@@ -101,6 +104,18 @@ const myApp = (function () {
             let containerDrop = document.querySelector('.dragn-drop-container');
             containerDrop.innerHTML = components.gameDragnDropFinishPage();
         }
+
+        this.gameWriteModule = function (terms, definitions, number) {
+            container = document.getElementById('game-words-container');
+            container.innerHTML = components.gameWritePage(terms, definitions, number, mistakeAnswer);
+        }
+
+        this.gameMistakeWriteModule = function (rightAnswer, numberAnswer) {
+            mistakeAnswer.push(numberAnswer);
+            let containerAnswer = document.getElementById('game-write-answer');
+            containerAnswer.value = rightAnswer;
+            containerAnswer.classList.add('mistake-answer');
+        }
     }
 
     function AppModel() {
@@ -152,6 +167,8 @@ const myApp = (function () {
                         that.dataModel.nameUser = user.user.displayName;
                         that.dataModel.idUser = user.user.uid
                         that.showUserPage();
+                    }).catch(() => {
+                        that.signUserError();
                     })
             }
         }
@@ -173,7 +190,7 @@ const myApp = (function () {
         }
 
         this.createModule = function (words) {
-            firebase.database().ref(that.idUser + '/').push({
+            firebase.database().ref(that.dataModel.idUser + '/').push({
                 name: words.name,
                 terms: words.terms,
                 definitions: words.definitions
@@ -235,9 +252,6 @@ const myApp = (function () {
             elem.classList.remove('hide');
         }
 
-        this.dragOver = function () {
-        }
-
         this.dragEnter = function (elem) {
             elem.classList.add('hovered');
         }
@@ -259,6 +273,30 @@ const myApp = (function () {
                 myAppView.gameDragnDropModuleFinish();
             }
         }
+
+        this.gameWriteModule = function (number) {
+            myAppView.gameWriteModule
+                (that.dataModel.activeCard.terms,
+                that.dataModel.activeCard.definitions,
+                number);
+        }
+
+        this.gameCheckWriteModule = function(answer, number) {
+            if (answer === that.dataModel.activeCard.terms[number-1]) {
+                myAppView.gameWriteModule
+                (that.dataModel.activeCard.terms,
+                that.dataModel.activeCard.definitions,
+                number);
+            } else {
+                myAppView.gameMistakeWriteModule(that.dataModel.activeCard.terms[number-1], number-1)
+                setTimeout(() => {
+                    myAppView.gameWriteModule
+                    (that.dataModel.activeCard.terms,
+                    that.dataModel.activeCard.definitions,
+                    number);
+                }, 1000)
+            }
+        }
     }
 
 
@@ -273,6 +311,10 @@ const myApp = (function () {
 
         this.gameDragnDrop = {
             dragCards: [],
+        }
+
+        this.gameWrite = {
+            number: 0,
         }
 
         this.userDataIn = {
@@ -399,8 +441,16 @@ const myApp = (function () {
                     that.gameDragnDropModule();
                 }
 
+                if (event.target && event.target.id === 'btn-write-module') {  //клик по функции "ПИСЬМО"
+                    that.defaultController(event);
+                    that.gameWriteModule();
+                }
 
-
+                
+                if (event.target && event.target.id === 'check-write-module') {  //клик по проверить в функции "ПИСЬМО"
+                    that.defaultController(event);
+                    that.gameCheckWriteModule();
+                }
             });
         },
 
@@ -477,6 +527,8 @@ const myApp = (function () {
                 if (elem.value) {
                     this.moduleData.terms.push(elem.value);
                 } else {
+                    this.moduleData.terms = [];
+                    this.moduleData.definitions = [];
                     myAppModel.createModuleError();
                 }
             }
@@ -484,6 +536,8 @@ const myApp = (function () {
                 if (elem.value) {
                     this.moduleData.definitions.push(elem.value);
                 } else {
+                    this.moduleData.terms = [];
+                    this.moduleData.definitions = [];
                     myAppModel.createModuleError();
                 }
             }
@@ -501,6 +555,9 @@ const myApp = (function () {
                 terms: this.moduleData.terms,
                 definitions: this.moduleData.definitions
             });
+            this.moduleData.nameModule = [];
+            this.moduleData.terms = [];
+            this.moduleData.definitions = [];
         }
 
         this.comeBackStartPage = function () { //возвращение на стартовую страницу
@@ -568,6 +625,16 @@ const myApp = (function () {
                     myAppModel.dragDrop(this, card);
                 });
             }
+        }
+
+        this.gameWriteModule = function () {
+            myAppModel.gameWriteModule(that.gameWrite.number);
+        }
+
+        this.gameCheckWriteModule = function() {
+            that.gameWrite.number++;
+            let answerWord = document.getElementById('game-write-answer');
+            myAppModel.gameCheckWriteModule(answerWord.value, that.gameWrite.number);
         }
     }
 

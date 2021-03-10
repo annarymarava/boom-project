@@ -127,7 +127,7 @@ nav {
     color: #3456b6;
 }
 
-.sign-in-page button, .sign-up-page button, .btn-make-module, .page-with-module button, .page-with-text-module button, .page-with-question button {
+.sign-in-page button, .sign-up-page button, .btn-make-module, .page-with-module button, .page-with-text-module button, .page-with-question button, .game-write-container button {
     width: 350px;
     height: 30px;
     color: #fff;
@@ -142,7 +142,7 @@ nav {
     font-weight: bold;
 }
 
-.sign-in-page button:hover, .sign-up-page button:hover, .page-with-text-module a:hover, .btn-make-module:hover {
+.sign-in-page button:hover, .sign-up-page button:hover, .page-with-text-module a:hover, .btn-make-module:hover, .game-write-container button:hover {
     box-shadow: 0px 6px 12px 0px #fff;
 }
 
@@ -433,4 +433,34 @@ button {
 .big-text {
     font-size: 50px;
     font-weight: bold;
+}
+/* --------------------------------------------------------------------------------------------------------------- */
+
+.game-write-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+}
+
+.game-write-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.game-write-container label {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.game-write-container input {
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.mistake-answer {
+    border: 2px solid #ff0000;
 }
