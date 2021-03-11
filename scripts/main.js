@@ -185,7 +185,7 @@ const myApp = (function () {
                         that.showUserPage();
                     }).catch((error) => {
                         console.log('Ошибка: ' + error)
-                    });
+                    }); 
             }
         }
 
@@ -349,6 +349,8 @@ const myApp = (function () {
     function AppController() {
         let myAppModel = null;
         const that = this;
+        const emailPattern = (/^([_a-zA-Z-0-9\.]{1})[_a-zA-Z-0-9\.]{3,20}[@]{1}[a-zA-Z]{2,10}[.]{1}[a-zA-Z]{2,5}/g);
+        const passwordPattern = (/^[a-z0-9_-]{6,16}$/);
         this.gameCards = {
             option: 'term',
             number: 0,
@@ -530,10 +532,13 @@ const myApp = (function () {
             const signUpName = document.getElementById('sign-up-name');
             const signUpEmail = document.getElementById('sign-up-email');
             const signUpPassword = document.getElementById('sign-up-password');
-            if (signUpEmail.value, signUpPassword.value, signUpName.value) {
-                that.userDataUp.email = signUpEmail.value;
-                that.userDataUp.password = signUpPassword.value;
-                that.userDataUp.name = signUpName.value;
+            let email = signUpEmail.value;
+            let name = signUpName.value;
+            let password = signUpPassword.value;
+            if (emailPattern.test(email) && passwordPattern.test(password) && name) {
+                that.userDataUp.email = email;
+                that.userDataUp.password = password;
+                that.userDataUp.name = name;
                 window.location = '#start-page-up';
             } else {
                 myAppModel.signUserError()
@@ -547,9 +552,11 @@ const myApp = (function () {
         this.checkSignInUser = function () { //логика для входа
             const signInEmail = document.getElementById('sign-in-login');
             const signInPassword = document.getElementById('sign-in-password');
-            if (signInEmail.value, signInPassword.value) {
-                that.userDataIn.email = signInEmail.value;
-                that.userDataIn.password = signInPassword.value;
+            let email = signInEmail.value;
+            let password = signInPassword.value;
+            if (emailPattern.test(email) && passwordPattern.test(password)) {
+                that.userDataIn.email = email;
+                that.userDataIn.password = password;
                 window.location = '#start-page-in';
             } else {
                 myAppModel.signUserError()
