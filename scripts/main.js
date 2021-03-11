@@ -121,12 +121,12 @@ const myApp = (function () {
             containerAnswer.classList.add('mistake-answer');
         }
 
-        this.gameTestModule = function (terms, definitions) { 
+        this.gameTestModule = function (terms, definitions) {
             container = document.getElementById('game-words-container');
             container.innerHTML = components.gameTestPage(terms, definitions);
         }
 
-        this.checkTestModule = function(result) {
+        this.checkTestModule = function (result) {
             container = document.getElementById('game-words-container');
             container.innerHTML = components.gameTestFinishPage(result);
         }
@@ -185,7 +185,7 @@ const myApp = (function () {
                         that.showUserPage();
                     }).catch((error) => {
                         console.log('Ошибка: ' + error)
-                    }); 
+                    });
             }
         }
 
@@ -239,7 +239,7 @@ const myApp = (function () {
             let cardNameArr = id.split('-');
             cardNameArr.splice(0, 1)
             let cardName = null;
-            if(cardNameArr.length === 1) {
+            if (cardNameArr.length === 1) {
                 cardName = cardNameArr[0];
             } else {
                 cardName = cardNameArr.join(' ');
@@ -299,34 +299,34 @@ const myApp = (function () {
         this.gameWriteModule = function (number) {
             myAppView.gameWriteModule
                 (that.dataModel.activeCard.terms,
-                that.dataModel.activeCard.definitions,
-                number);
-        }
-
-        this.gameCheckWriteModule = function(answer, number) {
-            if (answer === that.dataModel.activeCard.terms[number-1]) {
-                myAppView.gameWriteModule
-                (that.dataModel.activeCard.terms,
-                that.dataModel.activeCard.definitions,
-                number);
-            } else {
-                myAppView.gameMistakeWriteModule(that.dataModel.activeCard.terms[number-1], number-1)
-                setTimeout(() => {
-                    myAppView.gameWriteModule
-                    (that.dataModel.activeCard.terms,
                     that.dataModel.activeCard.definitions,
                     number);
+        }
+
+        this.gameCheckWriteModule = function (answer, number) {
+            if (answer === that.dataModel.activeCard.terms[number - 1]) {
+                myAppView.gameWriteModule
+                    (that.dataModel.activeCard.terms,
+                        that.dataModel.activeCard.definitions,
+                        number);
+            } else {
+                myAppView.gameMistakeWriteModule(that.dataModel.activeCard.terms[number - 1], number - 1)
+                setTimeout(() => {
+                    myAppView.gameWriteModule
+                        (that.dataModel.activeCard.terms,
+                            that.dataModel.activeCard.definitions,
+                            number);
                 }, 1000)
             }
         }
 
-        this.gameTestModule = function () { 
+        this.gameTestModule = function () {
             myAppView.gameTestModule(that.dataModel.activeCard.terms, that.dataModel.activeCard.definitions);
         }
 
         this.checkTestModule = function (data) {
             let rightAnswer = 9;
-            for (let i=0; i< 3; i++) {
+            for (let i = 0; i < 3; i++) {
                 if (data.answer.value[i] !== this.dataModel.activeCard.terms[data.answer.atribut[i]]) {
                     rightAnswer--;
                 }
@@ -339,7 +339,7 @@ const myApp = (function () {
                     rightAnswer--;
                 }
             }
-            let result = Math.round(rightAnswer*100/9);
+            let result = Math.round(rightAnswer * 100 / 9);
             myAppView.checkTestModule(result);
         }
     }
@@ -506,8 +506,8 @@ const myApp = (function () {
                 if (event.target && event.target.id === 'check-test-module') {  //клик по проверить в функции "ТЕСТ"
                     that.defaultController(event);
                     that.checkTestModule();
-            }
-                
+                }
+
             });
         },
 
@@ -535,13 +535,24 @@ const myApp = (function () {
             let email = signUpEmail.value;
             let name = signUpName.value;
             let password = signUpPassword.value;
-            if (emailPattern.test(email) && passwordPattern.test(password) && name) {
+            // if (emailPattern.test(email) && passwordPattern.test(password) && name) {
+            //     that.userDataUp.email = email;
+            //     that.userDataUp.password = password;
+            //     that.userDataUp.name = name;
+            //     window.location = '#start-page-up';
+            // } else {
+            //     myAppModel.signUserError()
+            // }
+
+            if ((!email) || (!password) || (!name)) {
+                myAppModel.signUserError()
+            } else if ((!email.match(emailPattern)) || (!password.match(passwordPattern))) {
+                myAppModel.signUserError()
+            } else {
                 that.userDataUp.email = email;
                 that.userDataUp.password = password;
                 that.userDataUp.name = name;
                 window.location = '#start-page-up';
-            } else {
-                myAppModel.signUserError()
             }
         }
 
@@ -554,12 +565,14 @@ const myApp = (function () {
             const signInPassword = document.getElementById('sign-in-password');
             let email = signInEmail.value;
             let password = signInPassword.value;
-            if (emailPattern.test(email) && passwordPattern.test(password)) {
+            if ((!email) || (!password)) {
+                myAppModel.signUserError()
+            } else if ((!email.match(emailPattern)) || (!password.match(passwordPattern))) {
+                myAppModel.signUserError()
+            } else {
                 that.userDataIn.email = email;
                 that.userDataIn.password = password;
                 window.location = '#start-page-in';
-            } else {
-                myAppModel.signUserError()
             }
         }
 
@@ -694,7 +707,7 @@ const myApp = (function () {
             myAppModel.gameWriteModule(that.gameWrite.number);
         }
 
-        this.gameCheckWriteModule = function() {
+        this.gameCheckWriteModule = function () {
             that.gameWrite.number++;
             let answerWord = document.getElementById('game-write-answer');
             myAppModel.gameCheckWriteModule(answerWord.value, that.gameWrite.number);
@@ -704,11 +717,11 @@ const myApp = (function () {
             myAppModel.gameTestModule();
         }
 
-        this.checkTestModule = function() { //проверка функции тест
+        this.checkTestModule = function () { //проверка функции тест
             const dataTest = {
-                answer: {atribut: [], value: []},
-                selection: {atribut: [], value: []},
-                option: {atribut: [], value: []}
+                answer: { atribut: [], value: [] },
+                selection: { atribut: [], value: [] },
+                option: { atribut: [], value: [] }
             }
             const answers = document.querySelectorAll('.test-answer-container input');
             const selections = document.querySelectorAll('.test-selection-container-first input');
