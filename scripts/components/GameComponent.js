@@ -8,7 +8,7 @@ const GameComponent = (data) => {
     let contentString = content.join(``);
     return (`
     <div class="page-with-game">
-        <div class="game-container ${data.name}">
+        <div class="game-container">
             <div class="game" id="btn-cards-module">Карточки</div>
             <div class="game" id="btn-dragn-drop-module">Перетягивание</div>
             <div class="game" id="btn-write-module">Письмо</div>

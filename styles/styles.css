@@ -32,8 +32,8 @@ nav {
     display: flex;
     align-items: center;    
     justify-content: space-between;
-    position: absolute;
-    z-index: 10;
+    position: fixed;
+    z-index: 100;
     width: 100%;
     height: 50px;
     background-color: #3456b6;
@@ -102,6 +102,34 @@ nav {
     box-shadow: 0px 6px 12px 0px #fff;
 }
 
+@media all and (max-width: 800px ) {
+    .hello-section h3 {
+        font-size: 18 px;
+    }
+    
+    .hello-section p {
+        font-size: 14px;
+    }
+
+    .container-btn a{
+        width: 120px;
+        height: 20px;
+        font-size: 12px;
+    }
+}
+
+@media all and (max-width: 550px ) {
+    .container-btn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-btn a{
+        margin-bottom: 10px;
+    }
+}
+
+
 /* --------------------------------------------------------------------------------------------------------------- */
 
 .sign-in-page, .sign-up-page, .page-with-module {
@@ -156,6 +184,16 @@ nav {
     justify-content: space-between;
     width: 150px;
 }
+
+@media all and (max-width: 650px ) {
+    .sign-in-page form, .sign-up-page form {
+        width: 300px;
+    }
+    .sign-in-page button, .sign-up-page button, .btn-make-module, .page-with-module button, .page-with-text-module button, .page-with-question button, .game-write-container button, .check-test-module {
+        width: 300px;
+        height: 25px;
+    }
+}
 /* --------------------------------------------------------------------------------------------------------------- */
 
 .page-with-module {
@@ -183,6 +221,21 @@ nav {
     box-shadow: 0px 3px 6px 0px #fff;
 }
 
+@media all and (max-width: 550px ) {
+    .btn-log-out {
+        width: 40px;
+        height: 18px;
+    }
+
+    .container-page-name {
+        width: 120px;
+    }
+
+    .container-page-name span{
+        font-size: 14px;
+    }
+}
+
 /* --------------------------------------------------------------------------------------------------------------- */
 
 
@@ -204,6 +257,17 @@ nav {
 
 .page-with-question input{
     width: 100%;
+}
+
+@media all and (max-width: 550px ) {
+    .page-with-question input{
+        width: 100%;
+    }
+
+    .page-with-question form{
+        width: 300px;
+    }
+
 }
 /* --------------------------------------------------------------------------------------------------------------- */
 
@@ -244,6 +308,16 @@ nav {
     display: flex;
     flex-direction: column;
 }
+
+@media all and (max-width: 550px ) {
+    .words-container {
+        flex-direction: column;
+    }
+
+    .words-container div{
+        width: 100%;
+    }
+}
 /* --------------------------------------------------------------------------------------------------------------- */
 .user-cards {
     width: 100px;
@@ -258,6 +332,14 @@ nav {
     cursor: pointer;
 }
 
+@media all and (max-width: 550px ) {
+    .user-cards {
+        width: 80px;
+        height: 40px;
+        margin: 10px;
+    }
+
+}
 
 .user-cards:hover {
     transform: scale(1.2);
@@ -393,6 +475,59 @@ button {
     outline: none;
 }
 
+@media all and (max-width: 700px ) {
+    .game {
+        font-size: 14px;
+        transform: rotate(-90deg);
+        width: 100px;
+        height: 40px;
+    }
+
+    .game-container {
+        width: 20%;
+    }
+
+    .game-card-button-container {
+        margin: 0;
+    }
+
+    .game-words-container p{
+        font-size: 14px;
+    }
+
+    .game-card {
+        width: 175px;
+        height: 300px;
+        font-size: 20px;
+    }
+    .game-words-container {
+        width: 80%;
+        margin: 0;
+    }
+
+    .game-words-container h3 {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .dragn-drop-container {
+        width: 90%;
+        height: 80vh;
+        margin-top: 0;
+    }
+}
+
+@media all and (max-width: 550px ) {
+    .game-words-container p{
+        font-size: 10px;
+    }
+
+    .game-words-container h3 {
+        font-size: 14px;
+    }
+}
+
+
 /* --------------------------------------------------------------------------------------------------------------- */
 
 .dragn-drop-container {
@@ -434,6 +569,13 @@ button {
     font-size: 35px;
     font-weight: bold;
 }
+
+
+@media all and (max-width: 700px ) {
+    .dragn-drop-container {
+        margin-top: 0;
+    }
+}
 /* --------------------------------------------------------------------------------------------------------------- */
 
 .game-write-container {
@@ -465,6 +607,23 @@ button {
     border: 2px solid #ff0000;
 }
 
+@media all and (max-width: 700px ) {
+    .game-write-container {
+        width: 200px;
+        padding: 5px;
+    }
+
+    .game-write-container form {
+        width: 90%;
+    }
+}
+
+@media all and (max-width: 700px ) {
+    .game-write-container button {
+        width: 200px;
+    }
+
+}
 /* --------------------------------------------------------------------------------------------------------------- */
 
 .test-container {
@@ -553,4 +712,14 @@ button {
 
 .test-options-container input {
     margin-right: 10px;
+}
+
+@media all and (max-width: 550px ) {
+    .test-container {
+        width: 95%;
+    }
+
+    .check-test-module {
+        width: 200px;
+    }
 }

@@ -162,7 +162,9 @@ const myApp = (function () {
                 .then((userCredential) => {
                     that.changeDataUser(userName)
                     that.signInUser(userEmail, userPassword);
-                })
+                }).catch((error) => {
+                    console.log('Ошибка: ' + error)
+                });
         }
 
         this.changeDataUser = function (userName) {
@@ -181,9 +183,9 @@ const myApp = (function () {
                         that.dataModel.nameUser = user.user.displayName;
                         that.dataModel.idUser = user.user.uid
                         that.showUserPage();
-                    }).catch(() => {
-                        that.signUserError();
-                    })
+                    }).catch((error) => {
+                        console.log('Ошибка: ' + error)
+                    });
             }
         }
 
